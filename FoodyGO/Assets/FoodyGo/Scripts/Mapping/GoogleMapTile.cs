@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
-using packt.FoodyGo.Mapping;
-using packt.FoodyGo.Services;
+using packt.FoodyGO.Services;
 
 namespace packt.FoodyGO.Mapping
 {
@@ -31,11 +30,11 @@ namespace packt.FoodyGO.Mapping
         public int size = 640;
         [Tooltip("Double the pixel resolution of the image returned")]
         public bool doubleResolution = true;
-
+        [Tooltip("Defines the origin of the map")]
         public MapLocation worldCenterLocation;
 
         [Header("Tile Settings")]
-        [Tooltip("Sets the tiles position in tile units")]
+        [Tooltip("Sets the tiles position in tile units")]        
         public Vector2 TileOffset;
         [Tooltip("Calculated tile center")]
         public MapLocation tileCenterLocation;
@@ -57,7 +56,7 @@ namespace packt.FoodyGO.Mapping
         // Update is called once per frame
         void Update ()
         {
-            // 新しい位置が取得されたかどうかを確認する
+            //check if a new location has been acquired
             if (gpsLocationService != null &&
                 gpsLocationService.IsServiceStarted && 
                 lastGPSUpdate < gpsLocationService.Timestamp)
@@ -77,14 +76,13 @@ namespace packt.FoodyGO.Mapping
 
         IEnumerator _RefreshMapTile ()
         {            
-            // タイル中心の緯度/経度を取得
+            //find the center lat/long of the tile
             tileCenterLocation.Latitude = GoogleMapUtils.adjustLatByPixels(worldCenterLocation.Latitude, (int)(size * 1 * TileOffset.y), zoomLevel);
             tileCenterLocation.Longitude = GoogleMapUtils.adjustLonByPixels(worldCenterLocation.Longitude, (int)(size * 1 * TileOffset.x), zoomLevel);
 
-            var url = GOOGLE_MAPS_URL;
             var queryString = "";
 
-            // 地図タイルをリクエストするクエリ文字列パラメーターを作成する
+            //build the query string parameters for the map tile request
             queryString += "center=" + WWW.UnEscapeURL (string.Format ("{0},{1}", tileCenterLocation.Latitude, tileCenterLocation.Longitude));
             queryString += "&zoom=" + zoomLevel.ToString ();
             queryString += "&size=" + WWW.UnEscapeURL (string.Format ("{0}x{0}", size));
@@ -92,15 +90,19 @@ namespace packt.FoodyGO.Mapping
             queryString += "&maptype=" + mapType.ToString ().ToLower ();
             queryString += "&format=" + "png";
 
-            // 地図のスタイルを追加する
+            //adding the map styles
             queryString += "&style=element:geometry|invert_lightness:true|weight:3.1|hue:0x00ffd5";
             queryString += "&style=element:labels|visibility:off";
 
+            //queryString += "&key={your API key here}";
+
+            //check if script is on a mobile device and using a location service 
             var usingSensor = false;
 #if MOBILE_INPUT
-            usingSensor = Input.location.isEnabledByUser && Input.location.status == LocationServiceStatus.Running;
+            usingSensor = Input.location.isEnabledByUser 
+                            && Input.location.status == LocationServiceStatus.Running 
+                            && gpsLocationService !=null;
 #endif
-
             queryString += "&sensor=" + (usingSensor ? "true" : "false");
 
             //set map bounds rect
@@ -112,20 +114,23 @@ namespace packt.FoodyGO.Mapping
 
             print(string.Format("Tile {0}x{1} requested with {2}", TileOffset.x, TileOffset.y, queryString));
 
-            // 最後に、画像をリクエストする
+            //finally, we request the image
             var req = UnityWebRequest.GetTexture(GOOGLE_MAPS_URL + "?" + queryString);
-            // サービスが応答するまで待つ
+            //yield until the service responds
             yield return req.Send();
-            // 最初に古いテクスチャーを破棄する
+            //first destroy the old texture first
             Destroy(GetComponent<Renderer>().material.mainTexture);
-            // エラーをチェックする
+            //when the image returns set it as the tile texture
             if (req.error != null) {
                 print (string.Format ("Error loading tile {0}x{1}:  exception={2}",
                     TileOffset.x, TileOffset.y, req.error));
             } else {
-                // レンダリング画像がエラーがなければ戻ってきた画像をタイルテクスチャーとして設定する
+                //when the image returns set it as the tile texture
                 GetComponent<Renderer> ().material.mainTexture = ((DownloadHandlerTexture)req.downloadHandler).texture;
                 print (string.Format ("Tile {0}x{1} textured", TileOffset.x, TileOffset.y));
+                if (TileOffset.x == 0 && TileOffset.y == 0) {
+                    gpsLocationService.MapRedrawn();
+                }
             }
         }
     }

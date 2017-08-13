@@ -4,6 +4,7 @@ using packt.FoodyGO.Mapping;
 using System.Collections.Generic;
 using packt.FoodyGO.Database;
 using packt.FoodyGo.Utils;
+using packt.FoodyGO.Controllers;
 
 namespace packt.FoodyGO.Services
 {
@@ -161,12 +162,15 @@ namespace packt.FoodyGO.Services
         }
 
         private void SpawnMonster(Monster monster)
-        {
+        {            
             var lon = monster.location.Longitude;
             var lat = monster.location.Latitude;
             var position = ConvertToWorldSpace(lon, lat);
             var rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up);
             monster.gameObject = (GameObject)Instantiate(monsterPrefab, position, rotation);
+            var controller = monster.gameObject.AddComponent<MonsterController>();
+            controller.monsterDataObject = monster;
+            controller.monsterService = this;
         }
     }
 }

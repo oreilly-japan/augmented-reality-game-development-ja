@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using packt.FoodyGO.Services;
 
 namespace packt.FoodyGO.Database
 {
@@ -11,6 +12,6 @@ namespace packt.FoodyGO.Database
         public double lastHeardTimestamp;
         public double lastSeenTimestamp;
         public GameObject gameObject;
-        public int footstepRange;
+        public int footstepRange;        
     }
 }

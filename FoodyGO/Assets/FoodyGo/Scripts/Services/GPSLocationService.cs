@@ -1,4 +1,5 @@
 ﻿using packt.FoodyGo.Utils;
+using packt.FoodyGO.Managers;
 using packt.FoodyGO.Mapping;
 using System.Collections;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 namespace packt.FoodyGO.Services
 {
     [AddComponentMenu("Services/GPSLocationService")]
-    public class GPSLocationService : MonoBehaviour
+    public class GPSLocationService : Singleton<GPSLocationService>
     {
         //Redraw Event
         public delegate void OnRedrawEvent(GameObject g);
@@ -30,7 +31,7 @@ namespace packt.FoodyGO.Services
         [Header("Exposed for GPS Debugging Purposes Only")]
         public bool IsServiceStarted;
         public float Latitude;
-        public float Longitude;
+        public float Longitude;        
         public float Altitude;
         public float Accuracy;
         public double Timestamp;
@@ -39,9 +40,10 @@ namespace packt.FoodyGO.Services
         public MapEnvelope mapEnvelope;        
         public Vector3 mapWorldCenter;
         public Vector2 mapScale;
-        
+        public MapEnvelope mapBounds;
 
-		//initialize the object
+
+        //initialize the object
         void Start()
         {
             print("Starting GPSLocationService");
@@ -182,6 +184,14 @@ namespace packt.FoodyGO.Services
             var lat2 = GoogleMapUtils.adjustLatByPixels(Latitude, -MapTileSizePixels/2, MapTileZoomLevel);
 
             mapEnvelope = new MapEnvelope(lon1, lat1, lon2, lat2);
+
+            lon1 = GoogleMapUtils.adjustLonByPixels(Longitude, -MapTileSizePixels*3/2 , MapTileZoomLevel);
+            lat1 = GoogleMapUtils.adjustLatByPixels(Latitude, MapTileSizePixels*3/2 , MapTileZoomLevel);
+
+            lon2 = GoogleMapUtils.adjustLonByPixels(Longitude, MapTileSizePixels*3/2 , MapTileZoomLevel);
+            lat2 = GoogleMapUtils.adjustLatByPixels(Latitude, -MapTileSizePixels*3/2 , MapTileZoomLevel);
+
+            mapBounds = new MapEnvelope(lon1, lat1, lon2, lat2);
         }
 
         //called when the object is destroyed
@@ -189,6 +199,14 @@ namespace packt.FoodyGO.Services
         {
             if (IsServiceStarted)
                 Input.location.Stop();
+        }
+
+        public MapLocation Location
+        {
+            get
+            {
+                return new MapLocation(Longitude, Latitude);
+            }
         }
     }
 }

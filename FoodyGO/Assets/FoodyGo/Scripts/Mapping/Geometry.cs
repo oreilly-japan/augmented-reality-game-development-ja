@@ -14,6 +14,13 @@ namespace packt.FoodyGO.Mapping
             Longitude = longitude;
             Latitude = latitude;
         }
+
+        public string LatLong {
+            get
+            {
+                return Latitude + "," + Longitude;
+            }
+        }
     }
 
     public class MapEnvelope

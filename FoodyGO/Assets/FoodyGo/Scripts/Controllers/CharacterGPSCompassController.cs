@@ -6,8 +6,7 @@ using packt.FoodyGO.Services;
 namespace packt.FoodyGO.Controllers
 {
     public class CharacterGPSCompassController : MonoBehaviour
-    {
-        public GPSLocationService gpsLocationService;
+    {        
         private double lastTimestamp;        
         private ThirdPersonCharacter thirdPersonCharacter;
         private Vector3 target;
@@ -17,9 +16,9 @@ namespace packt.FoodyGO.Controllers
         {
             Input.compass.enabled = true;
             thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
-            if (gpsLocationService != null)
+            if (GPSLocationService.Instance != null)
             {
-                gpsLocationService.OnMapRedraw += GpsLocationService_OnMapRedraw;
+                GPSLocationService.Instance.OnMapRedraw += GpsLocationService_OnMapRedraw;
             }
         }
 
@@ -32,15 +31,15 @@ namespace packt.FoodyGO.Controllers
         // Update is called once per frame
         void Update()
         {
-            if (gpsLocationService != null &&
-                gpsLocationService.IsServiceStarted &&
-                gpsLocationService.PlayerTimestamp > lastTimestamp)
+            if (GPSLocationService.Instance != null &&
+                GPSLocationService.Instance.IsServiceStarted &&
+                GPSLocationService.Instance.PlayerTimestamp > lastTimestamp)
             {
                 //convert GPS lat/long to world x/y 
-                var x = ((GoogleMapUtils.LonToX(gpsLocationService.Longitude)
-                    - gpsLocationService.mapWorldCenter.x) * gpsLocationService.mapScale.x);
-                var y = (GoogleMapUtils.LatToY(gpsLocationService.Latitude)
-                    - gpsLocationService.mapWorldCenter.y) * gpsLocationService.mapScale.y;
+                var x = ((GoogleMapUtils.LonToX(GPSLocationService.Instance.Longitude)
+                    - GPSLocationService.Instance.mapWorldCenter.x) * GPSLocationService.Instance.mapScale.x);
+                var y = (GoogleMapUtils.LatToY(GPSLocationService.Instance.Latitude)
+                    - GPSLocationService.Instance.mapWorldCenter.y) * GPSLocationService.Instance.mapScale.y;
                 target = new Vector3(-x, 0, y);                
             }
 

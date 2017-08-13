@@ -44,7 +44,7 @@ namespace packt.FoodyGO.Mapping
 
 		[Header("GPS Settings")]
 		[Tooltip("GPS service used to locate world center")]
-		public GPSLocationService gpsLocationService;
+		
         private double lastGPSUpdate;
 
 		// Use this for initialization
@@ -57,13 +57,13 @@ namespace packt.FoodyGO.Mapping
 		void Update ()
 		{
 			//check if a new location has been acquired
-            if (gpsLocationService != null &&
-                gpsLocationService.IsServiceStarted && 
-                lastGPSUpdate < gpsLocationService.Timestamp)
+            if (GPSLocationService.Instance != null &&
+                GPSLocationService.Instance.IsServiceStarted && 
+                lastGPSUpdate < GPSLocationService.Instance.Timestamp)
             {
-                lastGPSUpdate = gpsLocationService.Timestamp;
-                worldCenterLocation.Latitude = gpsLocationService.Latitude;
-                worldCenterLocation.Longitude = gpsLocationService.Longitude;
+                lastGPSUpdate = GPSLocationService.Instance.Timestamp;
+                worldCenterLocation.Latitude = GPSLocationService.Instance.Latitude;
+                worldCenterLocation.Longitude = GPSLocationService.Instance.Longitude;
                 print("GoogleMapTile refreshing map texture");
                 RefreshMapTile();
             }
@@ -101,7 +101,7 @@ namespace packt.FoodyGO.Mapping
 #if MOBILE_INPUT
             usingSensor = Input.location.isEnabledByUser 
 							&& Input.location.status == LocationServiceStatus.Running 
-							&& gpsLocationService !=null;
+							&& GPSLocationService.Instance !=null;
 #endif
 			queryString += "&sensor=" + (usingSensor ? "true" : "false");
 
@@ -115,22 +115,23 @@ namespace packt.FoodyGO.Mapping
             print(string.Format("Tile {0}x{1} requested with {2}", TileOffset.x, TileOffset.y, queryString));
 
 			//finally, we request the image
-            var req = UnityWebRequest.GetTexture(GOOGLE_MAPS_URL + "?" + queryString);
+			var req = UnityWebRequest.GetTexture(GOOGLE_MAPS_URL + "?" + queryString);
 			//yield until the service responds
-            yield return req.Send();
+			yield return req.Send();
+			print (GOOGLE_MAPS_URL + "?" + queryString);
 			//first destroy the old texture first
 			Destroy(GetComponent<Renderer>().material.mainTexture);
-            if (req.error != null) {
-                print (string.Format ("Error loading tile {0}x{1}:  exception={2}",
-                    TileOffset.x, TileOffset.y, req.error));
-            } else {
-                //when the image returns set it as the tile texture
-                GetComponent<Renderer> ().material.mainTexture = ((DownloadHandlerTexture)req.downloadHandler).texture;
-                print (string.Format ("Tile {0}x{1} textured", TileOffset.x, TileOffset.y));
-                if (TileOffset.x == 0 && TileOffset.y == 0) {
-                    gpsLocationService.MapRedrawn();
-                }
-            }
+			if (req.error != null) {
+				print (string.Format ("Error loading tile {0}x{1}:  exception={2}",
+					TileOffset.x, TileOffset.y, req.error));
+			} else {
+				//when the image returns set it as the tile texture
+				GetComponent<Renderer> ().material.mainTexture = ((DownloadHandlerTexture)req.downloadHandler).texture;
+				print (string.Format ("Tile {0}x{1} textured", TileOffset.x, TileOffset.y));
+				if (TileOffset.x == 0 && TileOffset.y == 0) {
+					GPSLocationService.Instance.MapRedrawn ();
+				}
+			}
         }
 	}
 }

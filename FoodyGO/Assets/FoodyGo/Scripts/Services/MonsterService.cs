@@ -10,7 +10,6 @@ namespace packt.FoodyGO.Services
 {
     public class MonsterService : MonoBehaviour
     {
-        public GPSLocationService gpsLocationService;
         public GameObject monsterPrefab;
         private double lastTimestamp;
 
@@ -36,7 +35,7 @@ namespace packt.FoodyGO.Services
         {
             monsters = new List<MonsterSpawnLocation>();
             StartCoroutine(CleanupMonsters());
-            gpsLocationService.OnMapRedraw += GpsLocationService_OnMapRedraw;
+            GPSLocationService.Instance.OnMapRedraw += GpsLocationService_OnMapRedraw;
         }
 
         private void GpsLocationService_OnMapRedraw(GameObject g)
@@ -83,11 +82,11 @@ namespace packt.FoodyGO.Services
         // Update is called once per frame
         void Update()
         {
-            if (gpsLocationService != null &&
-                gpsLocationService.IsServiceStarted &&
-                gpsLocationService.PlayerTimestamp > lastTimestamp)
+            if (GPSLocationService.Instance != null &&
+                GPSLocationService.Instance.IsServiceStarted &&
+                GPSLocationService.Instance.PlayerTimestamp > lastTimestamp)
             {
-                lastTimestamp = gpsLocationService.PlayerTimestamp;
+                lastTimestamp = GPSLocationService.Instance.PlayerTimestamp;
 
                 //update the monsters around the player
                 CheckMonsters();
@@ -98,18 +97,18 @@ namespace packt.FoodyGO.Services
         {            
             if (Random.value > monsterSpawnRate)
             {
-                var mlat = gpsLocationService.Latitude + Random.Range(-latitudeSpawnOffset, latitudeSpawnOffset);
-                var mlon = gpsLocationService.Longitude + Random.Range(-longitudeSpawnOffset, longitudeSpawnOffset);
+                var mlat = GPSLocationService.Instance.Latitude + Random.Range(-latitudeSpawnOffset, latitudeSpawnOffset);
+                var mlon = GPSLocationService.Instance.Longitude + Random.Range(-longitudeSpawnOffset, longitudeSpawnOffset);
                 var monster = new MonsterSpawnLocation
                 {
                     location = new MapLocation(mlon, mlat),
-                    spawnTimestamp = gpsLocationService.PlayerTimestamp
+                    spawnTimestamp = GPSLocationService.Instance.PlayerTimestamp
                 };
                 monsters.Add(monster);
             }
 
             //store players location for easy access in distance calculations
-            var playerLocation = new MapLocation(gpsLocationService.Longitude, gpsLocationService.Latitude);
+            var playerLocation = new MapLocation(GPSLocationService.Instance.Longitude, GPSLocationService.Instance.Latitude);
             //get the current Epoch time in seconds
             var now = Epoch.Now;
 
@@ -162,9 +161,9 @@ namespace packt.FoodyGO.Services
         {
             //convert GPS lat/long to world x/y 
             var x = ((GoogleMapUtils.LonToX(longitude)
-                - gpsLocationService.mapWorldCenter.x) * gpsLocationService.mapScale.x);
+                - GPSLocationService.Instance.mapWorldCenter.x) * GPSLocationService.Instance.mapScale.x);
             var y = (GoogleMapUtils.LatToY(latitude)
-                - gpsLocationService.mapWorldCenter.y) * gpsLocationService.mapScale.y;
+                - GPSLocationService.Instance.mapWorldCenter.y) * GPSLocationService.Instance.mapScale.y;
             return new Vector3(-x, 0, y);
         }
 

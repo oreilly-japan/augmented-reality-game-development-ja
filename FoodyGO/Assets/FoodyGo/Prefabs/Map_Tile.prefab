@@ -120,4 +120,3 @@ MonoBehaviour:
     Longitude: 0
   TopLeftCorner: {x: 0, y: 0}
   BottomRightCorner: {x: 0, y: 0}
-  gpsLocationService: {fileID: 0}

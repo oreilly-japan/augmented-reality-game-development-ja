@@ -153,7 +153,6 @@ MonoBehaviour:
     Longitude: 0
   TopLeftCorner: {x: 0, y: 0}
   BottomRightCorner: {x: 0, y: 0}
-  gpsLocationService: {fileID: 80912044}
 --- !u!23 &11511200
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -349,7 +348,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1946041514}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &44056474
 MonoBehaviour:
@@ -362,7 +361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c718a2d1d8da941438fb5286c51f5763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gpsLocationService: {fileID: 80912044}
   monsterPrefab: {fileID: 1000012646812228, guid: eddfd87b0a090144cbc0980c6f3ab2e2,
     type: 2}
   monsterSpawnRate: 0.1
@@ -374,74 +372,6 @@ MonoBehaviour:
   oneStepRange: 125
   twoStepRange: 150
   threeStepRange: 200
---- !u!1 &80912042
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 80912043}
-  - component: {fileID: 80912044}
-  m_Layer: 0
-  m_Name: GPS
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &80912043
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 80912042}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1946041514}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &80912044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 80912042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bfdcc793b1b7ce49a592039723808d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DesiredAccuracyInMeters: 10
-  UpdateAccuracyInMeters: 10
-  MapTileScale: 30
-  MapTileSizePixels: 640
-  MapTileZoomLevel: 17
-  Simulating: 1
-  StartCoordinates:
-    Latitude: 37.62814
-    Longitude: -122.4265
-  Rate: 5
-  SimulationOffsets:
-  - {x: -0.0003, y: 0}
-  - {x: -0.0008, y: 0}
-  - {x: -0.0008, y: 0}
-  - {x: -0.0003, y: 0}
-  - {x: -0.0001, y: 0}
-  IsServiceStarted: 0
-  Latitude: 0
-  Longitude: 0
-  Altitude: 0
-  Accuracy: 0
-  Timestamp: 0
-  PlayerTimestamp: 0
-  mapCenter:
-    Latitude: 0
-    Longitude: 0
-  mapWorldCenter: {x: 0, y: 0, z: 0}
-  mapScale: {x: 0, y: 0}
 --- !u!1001 &172420733
 Prefab:
   m_ObjectHideFlags: 0
@@ -499,7 +429,7 @@ Prefab:
         type: 2}
       propertyPath: gpsLocationService
       value: 
-      objectReference: {fileID: 80912044}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aefafad573480472881a94940be235f8, type: 2}
   m_IsPrefabParent: 0
@@ -562,7 +492,6 @@ MonoBehaviour:
     Longitude: 0
   TopLeftCorner: {x: 0, y: 0}
   BottomRightCorner: {x: 0, y: 0}
-  gpsLocationService: {fileID: 80912044}
 --- !u!23 &221808755
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -656,6 +585,11 @@ Transform:
   m_Father: {fileID: 1886024734}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &322625296 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4421908346687206, guid: 54e437f74f9b742939591c3af1847282,
+    type: 2}
+  m_PrefabInternal: {fileID: 1773245672}
 --- !u!1 &445910981
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,7 +635,6 @@ MonoBehaviour:
     Longitude: 0
   TopLeftCorner: {x: 0, y: 0}
   BottomRightCorner: {x: 0, y: 0}
-  gpsLocationService: {fileID: 80912044}
 --- !u!23 &445910983
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -984,6 +917,54 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49a0e923d39ec3c4c8bb97699e2f2903, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &806026951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 806026952}
+  - component: {fileID: 806026953}
+  m_Layer: 0
+  m_Name: GooglePlacesAPI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &806026952
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 806026951}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1946041514}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &806026953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 806026951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb7b47eb702675d49a2c50c8bff44be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeMarkerPrefab: {fileID: 1954899339447916, guid: 54e437f74f9b742939591c3af1847282,
+    type: 2}
+  location:
+    Latitude: 0
+    Longitude: 0
+  visualDistance: 2000
+  type: food
+  APIKey: YOUR API KEY
 --- !u!1001 &902241052
 Prefab:
   m_ObjectHideFlags: 0
@@ -1041,7 +1022,7 @@ Prefab:
         type: 2}
       propertyPath: gpsLocationService
       value: 
-      objectReference: {fileID: 80912044}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aefafad573480472881a94940be235f8, type: 2}
   m_IsPrefabParent: 0
@@ -1064,47 +1045,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224935459369545258, guid: b14c2c94e3d9b48d083617160157e389,
     type: 2}
   m_PrefabInternal: {fileID: 1181178872}
---- !u!1 &942110170
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 942110171}
-  - component: {fileID: 942110172}
-  m_Layer: 0
-  m_Name: CUDLR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &942110171
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 942110170}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1946041514}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &942110172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 942110170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2554b3ff7996402f9ad6253b4909cae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Port: 55055
 --- !u!1 &1037761617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1090,6 @@ MonoBehaviour:
     Longitude: 0
   TopLeftCorner: {x: 0, y: 0}
   BottomRightCorner: {x: 0, y: 0}
-  gpsLocationService: {fileID: 80912044}
 --- !u!23 &1037761619
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1252,7 +1191,6 @@ MonoBehaviour:
     Longitude: 0
   TopLeftCorner: {x: 0, y: 0}
   BottomRightCorner: {x: 0, y: 0}
-  gpsLocationService: {fileID: 80912044}
 --- !u!23 &1108358722
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2348,7 +2286,7 @@ Prefab:
         type: 2}
       propertyPath: gpsLocationService
       value: 
-      objectReference: {fileID: 80912044}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aefafad573480472881a94940be235f8, type: 2}
   m_IsPrefabParent: 0
@@ -2411,7 +2349,6 @@ MonoBehaviour:
     Longitude: 0
   TopLeftCorner: {x: 0, y: 0}
   BottomRightCorner: {x: 0, y: 0}
-  gpsLocationService: {fileID: 80912044}
 --- !u!23 &1509265551
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2603,7 +2540,7 @@ Prefab:
         type: 2}
       propertyPath: gpsLocationService
       value: 
-      objectReference: {fileID: 80912044}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aefafad573480472881a94940be235f8, type: 2}
   m_IsPrefabParent: 0
@@ -2673,7 +2610,7 @@ Prefab:
         type: 2}
       propertyPath: gpsLocationService
       value: 
-      objectReference: {fileID: 80912044}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aefafad573480472881a94940be235f8, type: 2}
   m_IsPrefabParent: 0
@@ -2708,7 +2645,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 730e2ebedbcb1454bab936020db50d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gpsLocationService: {fileID: 80912044}
 --- !u!114 &1748590162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2792,6 +2728,52 @@ Transform:
   m_Father: {fileID: 1886024734}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1773245672
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1886024734}
+    m_Modifications:
+    - target: {fileID: 4421908346687206, guid: 54e437f74f9b742939591c3af1847282, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421908346687206, guid: 54e437f74f9b742939591c3af1847282, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421908346687206, guid: 54e437f74f9b742939591c3af1847282, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421908346687206, guid: 54e437f74f9b742939591c3af1847282, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421908346687206, guid: 54e437f74f9b742939591c3af1847282, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421908346687206, guid: 54e437f74f9b742939591c3af1847282, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421908346687206, guid: 54e437f74f9b742939591c3af1847282, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421908346687206, guid: 54e437f74f9b742939591c3af1847282, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954899339447916, guid: 54e437f74f9b742939591c3af1847282, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 54e437f74f9b742939591c3af1847282, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1823909536
 GameObject:
   m_ObjectHideFlags: 0
@@ -2837,7 +2819,6 @@ MonoBehaviour:
     Longitude: 0
   TopLeftCorner: {x: 0, y: 0}
   BottomRightCorner: {x: 0, y: 0}
-  gpsLocationService: {fileID: 80912044}
 --- !u!23 &1823909538
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2951,7 +2932,7 @@ Prefab:
         type: 2}
       propertyPath: gpsLocationService
       value: 
-      objectReference: {fileID: 80912044}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aefafad573480472881a94940be235f8, type: 2}
   m_IsPrefabParent: 0
@@ -3014,7 +2995,6 @@ MonoBehaviour:
     Longitude: 0
   TopLeftCorner: {x: 0, y: 0}
   BottomRightCorner: {x: 0, y: 0}
-  gpsLocationService: {fileID: 80912044}
 --- !u!23 &1883656372
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3101,6 +3081,7 @@ Transform:
   - {fileID: 1946041514}
   - {fileID: 1748590166}
   - {fileID: 26776701}
+  - {fileID: 322625296}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3129,9 +3110,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 942110171}
-  - {fileID: 80912043}
   - {fileID: 44056473}
+  - {fileID: 806026952}
   m_Father: {fileID: 1886024734}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3187,7 +3167,7 @@ Prefab:
         type: 2}
       propertyPath: gpsLocationService
       value: 
-      objectReference: {fileID: 80912044}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aefafad573480472881a94940be235f8, type: 2}
   m_IsPrefabParent: 0
@@ -3262,7 +3242,7 @@ Prefab:
         type: 2}
       propertyPath: gpsLocationService
       value: 
-      objectReference: {fileID: 80912044}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aefafad573480472881a94940be235f8, type: 2}
   m_IsPrefabParent: 0
@@ -3332,7 +3312,7 @@ Prefab:
         type: 2}
       propertyPath: gpsLocationService
       value: 
-      objectReference: {fileID: 80912044}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aefafad573480472881a94940be235f8, type: 2}
   m_IsPrefabParent: 0
@@ -3395,7 +3375,6 @@ MonoBehaviour:
     Longitude: 0
   TopLeftCorner: {x: 0, y: 0}
   BottomRightCorner: {x: 0, y: 0}
-  gpsLocationService: {fileID: 80912044}
 --- !u!23 &2025590949
 MeshRenderer:
   m_ObjectHideFlags: 0

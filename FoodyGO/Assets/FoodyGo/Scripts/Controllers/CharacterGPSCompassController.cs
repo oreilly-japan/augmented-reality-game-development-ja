@@ -41,7 +41,7 @@ namespace packt.FoodyGO.Controllers
                     - gpsLocationService.mapWorldCenter.x) * gpsLocationService.mapScale.x);
                 var y = (GoogleMapUtils.LatToY(gpsLocationService.Latitude)
                     - gpsLocationService.mapWorldCenter.y) * gpsLocationService.mapScale.y;
-                target = new Vector3(-x, 0, y);
+                target = new Vector3(-x, 0, y);                
             }
 
             //check if the character has reached the new point

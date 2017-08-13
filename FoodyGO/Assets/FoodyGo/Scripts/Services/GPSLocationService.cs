@@ -1,4 +1,5 @@
-﻿using packt.FoodyGO.Mapping;
+﻿using packt.FoodyGo.Utils;
+using packt.FoodyGO.Mapping;
 using System.Collections;
 using UnityEngine;
 
@@ -10,6 +11,9 @@ namespace packt.FoodyGO.Services
         //Redraw Event
         public delegate void OnRedrawEvent(GameObject g);
         public event OnRedrawEvent OnMapRedraw;
+        [Header("GPS Accuracy")]
+        public float DesiredAccuracyInMeters = 10f;
+        public float UpdateAccuracyInMeters = 10f;
 
         [Header("Map Tile Parameters")]
         public int MapTileScale;
@@ -69,7 +73,7 @@ namespace packt.FoodyGO.Services
                 Longitude += SimulationOffsets[simulationIndex].x;
                 Latitude += SimulationOffsets[simulationIndex].y;
 
-                PlayerTimestamp++;
+                PlayerTimestamp = Epoch.Now;
 
                 yield return new WaitForSeconds(Rate);
             }
@@ -86,8 +90,8 @@ namespace packt.FoodyGO.Services
                 yield break;
             }
 
-            // Start service before querying location
-            Input.location.Start();
+            // Start service before querying location            
+            Input.location.Start(DesiredAccuracyInMeters, UpdateAccuracyInMeters);
 
             // Wait until service initializes
             int maxWait = 20;

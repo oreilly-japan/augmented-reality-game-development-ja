@@ -39,8 +39,16 @@ namespace packt.FoodyGO.TouchInput
         
 #endif
 
-
         void Start()
+        {
+            OnEnable ();
+        }
+
+        /// <summary>
+        /// changed from Start to Enable, in order to reset when 
+        /// game object is activated/deactivated
+        /// </summary>
+        void OnEnable()
         {
             if (throwObject != null)
             {
@@ -152,6 +160,7 @@ namespace packt.FoodyGO.TouchInput
                 var pos = startPosition;// Camera.main.ScreenToWorldPoint(startPosition);
                 var rot = startRotation;
                 target = (GameObject)Instantiate(throwObject, pos, rot);
+                target.transform.parent = transform.parent;
                 rb = target.GetComponent<Rigidbody>();
                 rb.useGravity = false;
                 rb.velocity = Vector3.zero;

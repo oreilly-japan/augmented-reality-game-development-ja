@@ -23,6 +23,7 @@ namespace packt.FoodyGO.PhysicsExt
             if (particlePrefab != null)
             {
                 var particle = (Transform)Instantiate(particlePrefab, pos, rot);
+                particle.parent = transform;
                 Destroy(particle.gameObject, destroyParticleDelaySeconds);
             }
             if (destroyObject)

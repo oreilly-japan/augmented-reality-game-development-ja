@@ -2425,7 +2425,7 @@ namespace SQLite4Unity3d
 				throw new NotSupportedException ("Must be a predicate");
 			}
 		}
-
+        
 		public TableQuery<T> Take (int n)
 		{
 			var q = Clone<T> ();

@@ -41,13 +41,12 @@ namespace packt.FoodyGO.Services
         public Vector3 mapWorldCenter;
         public Vector2 mapScale;
         public MapEnvelope mapBounds;
-
-
+        
         //initialize the object
-        void Start()
+        void Awake()
         {
             print("Starting GPSLocationService");
-
+                       
 #if !UNITY_EDITOR
             StartCoroutine(StartService());
             Simulating = false;
@@ -56,7 +55,7 @@ namespace packt.FoodyGO.Services
             Latitude = StartCoordinates.Latitude;
             Longitude = StartCoordinates.Longitude;
             Accuracy = 10;
-            Timestamp = 0;
+            Timestamp = Epoch.Now;
             CenterMap();
 #endif
         }
@@ -75,7 +74,7 @@ namespace packt.FoodyGO.Services
                 Longitude += SimulationOffsets[simulationIndex].x;
                 Latitude += SimulationOffsets[simulationIndex].y;
 
-                PlayerTimestamp = Epoch.Now;
+                PlayerTimestamp = Epoch.Now;                      
 
                 yield return new WaitForSeconds(Rate);
             }
@@ -126,13 +125,11 @@ namespace packt.FoodyGO.Services
                 CenterMap();
                 IsServiceStarted = true;
             }
-
-           
         }
 
 		//called once per frame
         void Update()
-        {
+        {            
             if(Input.location.status == LocationServiceStatus.Running  && IsServiceStarted)
             {
                 //updates the public values that can be consumed by other game objects

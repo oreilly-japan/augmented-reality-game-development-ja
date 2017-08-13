@@ -21,7 +21,7 @@ namespace packt.FoodyGO.Database
         public override string ToString()
         {
             return string.Format("Monster: {0}, Level: {1}, Power:{2}, Skills:{3}",
-                Name, Level, Power, Skills);
+                Name, Level, Power, Skills);           
         }
     }
 

@@ -12,13 +12,107 @@ namespace packt.FoodyGO.Services
 {
     public class GooglePlacesAPIService : Singleton<GooglePlacesAPIService>
     {
+        public enum PlacesType
+        {
+            accounting,
+            airport,
+            amusement_park,
+            aquarium,
+            art_gallery,
+            atm,
+            bakery,
+            bank,
+            bar,
+            beauty_salon,
+            bicycle_store,
+            book_store,
+            bowling_alley,
+            bus_station,
+            cafe,
+            campground,
+            car_dealer,
+            car_rental,
+            car_repair,
+            car_wash,
+            casino,
+            cemetery,
+            church,
+            city_hall,
+            clothing_store,
+            convenience_store,
+            courthouse,
+            dentist,
+            department_store,
+            doctor,
+            electrician,
+            electronics_store,
+            embassy,
+            fire_station,
+            florist,
+            funeral_home,
+            furniture_store,
+            gas_station,
+            gym,
+            hair_care,
+            hardware_store,
+            hindu_temple,
+            home_goods_store,
+            hospital,
+            insurance_agency,
+            jewelry_store,
+            laundry,
+            lawyer,
+            library,
+            liquor_store,
+            local_government_office,
+            locksmith,
+            lodging,
+            meal_delivery,
+            meal_takeaway,
+            mosque,
+            movie_rental,
+            movie_theater,
+            moving_company,
+            museum,
+            night_club,
+            painter,
+            park,
+            parking,
+            pet_store,
+            pharmacy,
+            physiotherapist,
+            plumber,
+            police,
+            post_office,
+            real_estate_agency,
+            restaurant,
+            roofing_contractor,
+            rv_park,
+            school,
+            shoe_store,
+            shopping_mall,
+            spa,
+            stadium,
+            storage,
+            store,
+            subway_station,
+            synagogue,
+            taxi_stand,
+            train_station,
+            transit_station,
+            travel_agency,
+            university,
+            veterinary_care,
+            zoo
+        }
+
         private const string GOOGLE_PLACES_NEARBY_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
         private const string GOOGLE_PLACES_RADAR_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/radarsearch/json";
 
         public GameObject placeMarkerPrefab;
         public MapLocation location;
         public float visualDistance;
-        public string type;
+        public PlacesType type = PlacesType.restaurant;
         public string APIKey;
         
         private Dictionary<string, GameObject> places;
@@ -116,19 +210,26 @@ namespace packt.FoodyGO.Services
                         go.transform.position = pos;
                         go.SetActive(true);
                         placesPool.Remove(go);
-                        var pc = go.GetComponent<PlacesController>();
-                        pc.LastUpdateTimestamp = GPSLocationService.Instance.PlayerTimestamp;
+                        SetPlacesController(s, lon, lat, go);
                         places.Add(s.id, go);
                     }
                     else
                     {
                         var go = (GameObject)Instantiate(placeMarkerPrefab, pos, Quaternion.identity, transform);
                         var pc = go.AddComponent<PlacesController>();
-                        pc.LastUpdateTimestamp = GPSLocationService.Instance.PlayerTimestamp;
+                        SetPlacesController(s, lon, lat, go);
                         places.Add(s.id, go);
                     }                    
                 }
             }
+        }
+
+        private static void SetPlacesController(Result s, double lon, double lat, GameObject go)
+        {
+            var pc = go.GetComponent<PlacesController>();
+            pc.placeId = s.place_id;
+            pc.location = new MapLocation((float)lon, (float)lat);
+            pc.LastUpdateTimestamp = GPSLocationService.Instance.PlayerTimestamp;
         }
 
         private Vector3 ConvertToWorldSpace(double longitude, double latitude)
@@ -213,4 +314,5 @@ namespace packt.FoodyGO.Services
             return string.Format("SearchResult: {0}, Results: {1}", status, results.Count);
         }
     }
+
 }

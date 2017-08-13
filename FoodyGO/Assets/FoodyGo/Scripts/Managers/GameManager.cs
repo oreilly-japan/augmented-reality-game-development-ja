@@ -4,6 +4,7 @@ using System.Collections;
 using System;
 using UnityEngine.EventSystems;
 using packt.FoodyGO.Controllers;
+using packt.FoodyGO.Mapping;
 
 namespace packt.FoodyGO.Managers
 {
@@ -17,6 +18,7 @@ namespace packt.FoodyGO.Managers
         public string MapSceneName;
         public string CatchSceneName;
         public string InventorySceneName;
+        public string PlacesSceneName;
         
         [Header("Layer Names")]
         public string MonsterLayerName = "Monster";
@@ -25,6 +27,7 @@ namespace packt.FoodyGO.Managers
         private GameScene MapScene;        
         private GameScene InventoryScene;        
         private GameScene CatchScene;
+        private GameScene PlacesScene;
         private GameScene lastScene;
 
         // Use this for initialization
@@ -39,6 +42,7 @@ namespace packt.FoodyGO.Managers
             else if(string.IsNullOrEmpty(MapSceneName) == false)
             {
                 SceneManager.LoadSceneAsync(MapSceneName, LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync(PlacesSceneName, LoadSceneMode.Additive);
             }
         }
 
@@ -64,6 +68,10 @@ namespace packt.FoodyGO.Managers
             {
                 CatchScene = new GameScene();
                 CatchScene.scene = scene;                
+            }else if(scene.name == PlacesSceneName)
+            {
+                PlacesScene = new GameScene();
+                PlacesScene.scene = scene;
             }
         }
 
@@ -96,6 +104,32 @@ namespace packt.FoodyGO.Managers
             }
         }
 
+        public void OnPlaceClicked(string placeId, MapLocation location)
+        {
+            if (MapScene != null && MapScene.RootGameObject != null)
+            {
+                if (MapScene.RootGameObject.activeInHierarchy) lastScene = MapScene;
+                MapScene.RootGameObject.SetActive(false);
+            }
+
+            //check if the scene has already been run
+            if (PlacesScene == null)
+            {
+                SceneManager.LoadSceneAsync(PlacesSceneName, LoadSceneMode.Additive);
+            }
+            else
+            {
+                //scene has been run before, reactivate it                
+                var psc = PlacesScene.RootGameObject.GetComponent<PlacesSceneController>();
+                if (psc != null)
+                {
+                    psc.ResetScene(placeId, location);                    
+                }
+                PlacesScene.RootGameObject.SetActive(true);
+            }
+        }
+        
+
         public void CloseMe(InventorySceneController inventorySceneController)
         {
             InventoryScene.RootGameObject.SetActive(false);
@@ -106,6 +140,12 @@ namespace packt.FoodyGO.Managers
         {
             CatchScene.RootGameObject.SetActive(false);
             MapScene.RootGameObject.SetActive(true);            
+        }
+
+        public void CloseMe(PlacesSceneController placesSceneController)
+        {
+            PlacesScene.RootGameObject.SetActive(false);            
+            MapScene.RootGameObject.SetActive(true);
         }
 
         //display the Splash scene and then load the game start scene
@@ -162,6 +202,29 @@ namespace packt.FoodyGO.Managers
                 mc.monsterService.RemoveMonster(mc.monsterSpawnLocation);
                 MapScene.RootGameObject.SetActive(false);               
             }
+
+            if (go.GetComponent<PlacesController>() != null)
+            {
+                print("Places hit, need to open places scene ");
+                //check if the scene has already been run
+                if (PlacesScene == null)
+                {
+                    SceneManager.LoadSceneAsync(PlacesSceneName, LoadSceneMode.Additive);
+                }
+                else
+                {
+                    //the scene has run before, reactivate it                    
+                    var psc = PlacesScene.RootGameObject.GetComponent<PlacesSceneController>();
+                    if (psc != null)
+                    {
+                        var pc = go.GetComponent<PlacesController>();
+                        psc.ResetScene(pc.placeId, pc.location);
+                    }
+                    PlacesScene.RootGameObject.SetActive(true);
+                }                
+                MapScene.RootGameObject.SetActive(false);
+            }
+
         }
         
         private int BuildLayerMask()

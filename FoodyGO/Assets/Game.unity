@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -208,6 +208,7 @@ MonoBehaviour:
   MapSceneName: Map
   CatchSceneName: Catch
   InventorySceneName: Inventory
+  PlacesSceneName: Places
   MonsterLayerName: Monster
 --- !u!4 &1223561701
 Transform:
@@ -335,4 +336,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DatabaseName: foodygo.db
-  DatabaseVersion: 1.0.0
+  DatabaseVersion: 1.0.1

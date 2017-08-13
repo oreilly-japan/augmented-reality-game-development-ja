@@ -963,7 +963,7 @@ MonoBehaviour:
     Latitude: 0
     Longitude: 0
   visualDistance: 2000
-  type: food
+  type: 71
   APIKey: YOUR API KEY
 --- !u!1001 &902241052
 Prefab:

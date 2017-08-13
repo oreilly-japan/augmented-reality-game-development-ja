@@ -6,6 +6,7 @@ using System.IO;
 using System.Collections.Generic;
 using packt.FoodyGO.Managers;
 using System;
+using System.Linq;
 
 namespace packt.FoodyGO.Services
 {
@@ -13,19 +14,22 @@ namespace packt.FoodyGO.Services
     {
         public string DatabaseName = "foodygo.db";
         public string DatabaseVersion = "1.0.0";
+
+        public Monster[] Monsters;
+
         private bool newDatabase;
         private SQLiteConnection _connection;
-        
+
         // Use this for initialization
         //use Awake instead of Start for earlier initialization
         void Awake()
         {
 #if UNITY_EDITOR
-        var dbPath = string.Format(@"Assets/StreamingAssets/{0}", DatabaseName);
-        if (!File.Exists(dbPath))
-        {
-            newDatabase = true;
-        }
+            var dbPath = string.Format(@"Assets/StreamingAssets/{0}", DatabaseName);
+            if (!File.Exists(dbPath))
+            {
+                newDatabase = true;
+            }
 #else
             // check if file exists in Application.persistentDataPath
             var filepath = string.Format("{0}/{1}", Application.persistentDataPath, DatabaseName);
@@ -73,7 +77,8 @@ namespace packt.FoodyGO.Services
             if (newDatabase)
             {
                 CreateDB();
-            }else
+            }
+            else
             {
                 CheckForUpgrade();
             }
@@ -108,7 +113,7 @@ namespace packt.FoodyGO.Services
 
             if (current.Length != dbVersion.Length)
                 throw new ApplicationException("Database version numbers do not match.");
-            for(int i = 0; i < current.Length; i++)
+            for (int i = 0; i < current.Length; i++)
             {
                 if (int.Parse(current[i]) < int.Parse(dbVersion[i])) return true;
             }
@@ -119,36 +124,48 @@ namespace packt.FoodyGO.Services
         {
             Debug.Log("Creating database...");
             var minfo = _connection.GetTableInfo("Monster");
-            if(minfo.Count>0) _connection.DropTable<Monster>();                        
+            if (minfo.Count > 0) _connection.DropTable<Monster>();
             _connection.CreateTable<Monster>();
             Debug.Log("Monster table created.");
             var vinfo = _connection.GetTableInfo("DatabaseVersion");
-            if(vinfo.Count>0) _connection.DropTable<DatabaseVersion>();
+            if (vinfo.Count > 0) _connection.DropTable<DatabaseVersion>();
             _connection.CreateTable<DatabaseVersion>();
             Debug.Log("DatabaseVersion table created.");
+            //create the InventoryItem table
+            var iinfo = _connection.GetTableInfo("InventoryItem");
+            if (iinfo.Count > 0) _connection.DropTable<InventoryItem>();
+            _connection.CreateTable<InventoryItem>();
+            //create the Player table
+            var pinfo = _connection.GetTableInfo("Player");
+            if (pinfo.Count > 0) _connection.DropTable<Player>();
+            _connection.CreateTable<Player>();
 
             _connection.Insert(new DatabaseVersion
             {
                 Version = DatabaseVersion
             });
             Debug.Log("Database version updated to " + DatabaseVersion);
+
+            _connection.Insert(new Player
+            {
+                Experience = 0,
+                Level = 1
+            });
             Debug.Log("Database created.");
         }
 
         private void UpgradeDB()
         {
-            var monsters = _connection.Table<Monster>();
-            //need to manually convert this to a list
-            //Linq is not supported on iOS
-            List<Monster> list = new List<Monster>();
-            foreach(var m in monsters)
-            {
-                list.Add(m);
-            }
+            var monsters = _connection.Table<Monster>().ToList();
+            var player = _connection.Table<Player>().ToList();
+            var items = _connection.Table<InventoryItem>().ToList();
             CreateDB();
-            Debug.Log("Replacing monsters.");
-            _connection.InsertAll(list);
-        }
+            Debug.Log("Replacing data.");
+            _connection.InsertAll(monsters);
+            _connection.InsertAll(items);
+            _connection.UpdateAll(player);
+            Debug.Log("Upgrade successful!");
+		}
 
         public string GetDatabaseVersion()
         {
@@ -170,7 +187,23 @@ namespace packt.FoodyGO.Services
 
         public IEnumerable<Monster> ReadMonsters()
         {
+#if UNITY_EDITOR
+            //for debugging purposes we always want to make sure
+            //a monster is in the database
+            var monsters = _connection.Table<Monster>();
+            if (monsters.Count() < 1)
+            {
+                var monster = MonsterFactory.CreateRandomMonster();
+                CreateMonster(monster);
+                return _connection.Table<Monster>();
+            }
+            else
+            {
+                return monsters;
+            }
+#else
             return _connection.Table<Monster>();
+#endif
         }
 
         public int UpdateMonster(Monster m)
@@ -183,5 +216,62 @@ namespace packt.FoodyGO.Services
             return _connection.Delete(m);
         }
 
+        //CRUD for InventoryItem
+        public InventoryItem CreateInventoryItem(InventoryItem ii)
+        {
+            var id = _connection.Insert(ii);
+            ii.Id = id;
+            return ii;
+        }
+
+        public InventoryItem ReadInventoryItem(int id)
+        {
+            return _connection.Table<InventoryItem>()
+                .Where(w => w.Id == id).FirstOrDefault();
+        }
+
+        public IEnumerable<InventoryItem> ReadInventoryItems()
+        {
+            return _connection.Table<InventoryItem>();
+        }
+
+        public int UpdateInventoryItem(InventoryItem ii)
+        {
+            return _connection.Update(ii);
+        }
+
+        public int DeleteInventoryItem(InventoryItem ii)
+        {
+            return _connection.Delete(ii);
+        }
+
+        //CRUD for Player
+        public Player CreatePlayer(Player p)
+        {
+            var id = _connection.Insert(p);
+            p.Id = id;
+            return p;
+        }
+
+        public Player ReadPlayer(int id)
+        {
+            return _connection.Table<Player>()
+                .Where(w => w.Id == id).FirstOrDefault();
+        }
+
+        public IEnumerable<Player> ReadPlayers()
+        {
+            return _connection.Table<Player>();
+        }
+
+        public int UpdatePlayer(Player p)
+        {
+            return _connection.Update(p);
+        }
+
+        public int DeletePlayer(Player p)
+        {
+            return _connection.Delete(p);
+        }
     }
 }

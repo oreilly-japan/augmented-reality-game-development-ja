@@ -39,8 +39,8 @@ namespace packt.FoodyGO.Services
             "Chicken"
         };
 
-        public static int power = 1;
-        public static int level = 1;        
+        public static int power = 4;
+        public static int level = 4;        
         
         public static Monster CreateRandomMonster()
         {

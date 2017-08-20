@@ -102,6 +102,13 @@ namespace packt.FoodyGO.TouchInput
         {         
             if (!m_Dragging)
             {
+                if (!thrown)
+                {
+                    Vector3 currentPosition = Camera.main.transform.position
+                        + Camera.main.transform.up * -0.1f
+                        + Camera.main.transform.forward * 0.4f;
+                    target.transform.position = currentPosition;
+                }
                 return;
             }           
 

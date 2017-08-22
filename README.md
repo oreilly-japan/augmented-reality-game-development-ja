@@ -89,11 +89,16 @@ Unityでプロジェクトを開く際に`FoodyGO`フォルダーを指定して
 _誤_
 
 ```
-4. 引き続きCatchMonsterが選択された状態で、［Hierarchy］ウィンドウのMosnterParentをドラッグして、［Unity AR Hit Test Example (Script)］コンポーネントの［Hit Transform］のフィールドにドロップします。
+4. 引き続きCatchMonsterが選択された状態で、［Hierarchy］ウィンドウの
+   MosnterParentをドラッグして、［Unity AR Hit Test Example (Script)］コンポーネン
+   トの［Hit Transform］のフィールドにドロップします。
 ```
 
 _正_
 
 ```
-4. 引き続きCatchMonsterが選択された状態で、［Hierarchy］ウィンドウのMosnterParentをドラッグして、［Unity AR Hit Test Example (Script)］コンポーネントの［Hit Transform］のフィールドにドロップします。そして、CatchMonsterの［Transform］の［Position］の値を0, 0, 0、［Scale］の値を0.2, 0.2,0.2に設定します。
+4. 引き続きCatchMonsterが選択された状態で、［Hierarchy］ウィンドウの
+   MosnterParentをドラッグして、［Unity AR Hit Test Example (Script)］コンポーネン
+   トの［Hit Transform］のフィールドにドロップします。そして、CatchMonsterの［Transform］
+   の［Position］の値を0, 0, 0、［Scale］の値を0.2, 0.2,0.2に設定します。
 ```

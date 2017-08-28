@@ -8,6 +8,10 @@
 
 本リポジトリはオライリー・ジャパン発行書籍『[UnityによるARゲーム開発](http://www.oreilly.co.jp/books/9784873118109/)』（原書名『[Augmented Reality Game Development](https://www.packtpub.com/application-development/augmented-reality-game-development)』）のサポートサイトです。
 
+* [リソースファイル](https://github.com/oreilly-japan/augmented-reality-game-development-ja/edit/master/README.md#リソースファイル)
+* [完成状態のプロジェクト](https://github.com/oreilly-japan/augmented-reality-game-development-ja/edit/master/README.md#完成状態のプロジェクト)
+* [正誤表](https://github.com/oreilly-japan/augmented-reality-game-development-ja/edit/master/README.md#正誤表)
+
 ## サンプルコード
 
 サンプルコードの解説は本書籍をご覧ください。
@@ -38,7 +42,7 @@
 また、下記の各章のリンクからzipファイルでダウンロードすることもできます。
 ZIPファイルのダウンロード後、展開してご使用ください。
 
-（Windowsでファイルのパス名が長すぎるというエラーが発生する場合は、[7-Zip](https://sevenzip.osdn.jp/)等の圧縮・展開ソフトウェアでの展開を試してみてください。）
+（Windowsでファイルのパス名が長すぎるというエラーが発生する場合は、[7-Zip](https://sevenzip.osdn.jp/)等の圧縮・展開ソフトウェアでの展開を試してみてください。）
 
 * [1章：Chapter_1_End](https://github.com/oreilly-japan/augmented-reality-game-development-ja/archive/Chapter_1_End.zip)
 * [2章：Chapter_2_End](https://github.com/oreilly-japan/augmented-reality-game-development-ja/archive/Chapter_2_End.zip)
@@ -52,9 +56,9 @@ ZIPファイルのダウンロード後、展開してご使用ください。
 * [付録 A：Chapter_11a_End](https://github.com/oreilly-japan/augmented-reality-game-development-ja/archive/Chapter_11a_End.zip)
 * [付録 B：Chapter_12b_End](https://github.com/oreilly-japan/augmented-reality-game-development-ja/archive/Chapter_12b_End.zip)
 
-### 使用方法
+#### 使用方法
 
-上記各章ごとのリンクからダウンロードするとzip形式の圧縮ファイルでダウンロードされるので解凍します。
+上記各章ごとのリンクからダウンロードするとzip形式の圧縮ファイルでダウンロードされるので展開します。
 Unityでプロジェクトを開く際に`FoodyGO`フォルダーを指定してください。
 ただし、Unity標準アセットは含まれていないので、プロジェクトをUnityで開いたら次の手順で必要なものをインポートしてください。
 

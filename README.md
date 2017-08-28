@@ -8,9 +8,9 @@
 
 本リポジトリはオライリー・ジャパン発行書籍『[UnityによるARゲーム開発](http://www.oreilly.co.jp/books/9784873118109/)』（原書名『[Augmented Reality Game Development](https://www.packtpub.com/application-development/augmented-reality-game-development)』）のサポートサイトです。
 
-* [リソースファイル](https://github.com/oreilly-japan/augmented-reality-game-development-ja/edit/master/README.md#リソースファイル)
-* [完成状態のプロジェクト](https://github.com/oreilly-japan/augmented-reality-game-development-ja/edit/master/README.md#完成状態のプロジェクト)
-* [正誤表](https://github.com/oreilly-japan/augmented-reality-game-development-ja/edit/master/README.md#正誤表)
+* [リソースファイル](#サンプルコード)
+* [完成状態のプロジェクト](#完成状態のプロジェクト)
+* [正誤表](#正誤表)
 
 ## サンプルコード
 

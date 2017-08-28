@@ -12,8 +12,9 @@
 
 サンプルコードの解説は本書籍をご覧ください。
 
-### ダウンロード方法
-本書のプロジェクト（FoodyGO）は本文の解説とこのリポジトリのリソースを組合せて作ることができます。各章で使うリソースパッケージは下記のリンクからダウンロードできます。
+### リソースファイル
+
+本書のプロジェクト（FoodyGO）を完成させるには下記リソースファイルが必要です。各章で使うリソースパッケージを下記のリンクからダウンロードしてご使用ください。
 
 * [2章用：Chapter2.unitypackage](https://github.com/oreilly-japan/augmented-reality-game-development-ja/raw/master/resources/Chapter2.unitypackage)
 * [3章用：Chapter3.unitypackage](https://github.com/oreilly-japan/augmented-reality-game-development-ja/raw/master/resources/Chapter3.unitypackage)
@@ -31,7 +32,13 @@
 * [10章用：Chapter10.unitypackage](https://github.com/oreilly-japan/augmented-reality-game-development-ja/raw/master/resources/Chapter10.unitypackage)
 
 
-また、各章ごとに終了時点の状態のUnityプロジェクトをブランチを分けて保存してあります。下記の各章のリンクからダウンロードできます。
+### 完成状態のプロジェクト
+各章ごとに終了時点の状態のUnityプロジェクトをこのリポジトリでブランチを分けて保存してあります。ブランチを切り替えることで各章の状態を参照可能です。
+
+また、下記の各章のリンクからzipファイルでダウンロードすることもできます。
+ZIPファイルのダウンロード後、展開してご使用ください。
+
+（Windowsでファイルのパス名が長すぎるというエラーが発生する場合は、[7-Zip](https://sevenzip.osdn.jp/)等の圧縮・展開ソフトウェアでの展開を試してみてください。）
 
 * [1章：Chapter_1_End](https://github.com/oreilly-japan/augmented-reality-game-development-ja/archive/Chapter_1_End.zip)
 * [2章：Chapter_2_End](https://github.com/oreilly-japan/augmented-reality-game-development-ja/archive/Chapter_2_End.zip)
@@ -42,8 +49,8 @@
 * [7章：Chapter_7_End](https://github.com/oreilly-japan/augmented-reality-game-development-ja/archive/Chapter_7_End.zip)
 * [8章（完成状態）：Chapter_8_End](https://github.com/oreilly-japan/augmented-reality-game-development-ja/archive/Chapter_8_End.zip)
 
-* [付録 A](https://github.com/oreilly-japan/augmented-reality-game-development-ja/archive/Chapter_11a_End.zip)
-* [付録 B](https://github.com/oreilly-japan/augmented-reality-game-development-ja/archive/Chapter_12b_End.zip)
+* [付録 A：Chapter_11a_End](https://github.com/oreilly-japan/augmented-reality-game-development-ja/archive/Chapter_11a_End.zip)
+* [付録 B：Chapter_12b_End](https://github.com/oreilly-japan/augmented-reality-game-development-ja/archive/Chapter_12b_End.zip)
 
 ### 使用方法
 
@@ -75,6 +82,8 @@ Unityでプロジェクトを開く際に`FoodyGO`フォルダーを指定して
 * Nexus 5X（Android 7.1.1）
 * iPhone SE（iOS 10.3.2）
 * MacBook Pro Retina, 13-inch, Mid 2014（Mac OS X 10.11.5）
+
+※ 付録BのプロジェクトにはXcode 9.0 beta以降、およびiOS 11 beta以降が必要です。
 
 ## 正誤表
 

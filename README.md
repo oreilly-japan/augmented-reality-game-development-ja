@@ -87,6 +87,8 @@ Unityでプロジェクトを開く際に`FoodyGO`フォルダーを指定して
 * iPhone SE（iOS 10.3.2）
 * MacBook Pro Retina, 13-inch, Mid 2014（Mac OS X 10.11.5）
 
+※ 付録AのプロジェクトにはUnityの5.6.x系のバージョンを使う必要があります。現時点ではTangoのSDKがUnity 2017.1に対応していないためです。
+
 ※ 付録BのプロジェクトにはXcode 9.0 beta以降、およびiOS 11 beta以降が必要です。
 
 ## 正誤表

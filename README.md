@@ -10,7 +10,7 @@
 
 * [リソースファイル](#サンプルコード)
 * [完成状態のプロジェクト](#完成状態のプロジェクト)
-* [正誤表](#正誤表)
+* [正誤表](https://github.com/oreilly-japan/augmented-reality-game-development-ja/wiki/errata)
 
 ## サンプルコード
 
@@ -93,42 +93,5 @@ Unityでプロジェクトを開く際に`FoodyGO`フォルダーを指定して
 
 ## 正誤表
 
-下記の誤りがありました。お詫びして訂正いたします。
+正誤表は[Wiki](https://github.com/oreilly-japan/augmented-reality-game-development-ja/wiki/errata)に移動しました。
 
-本ページに掲載されていない誤植・間違いを見つけた方は、japan＠oreilly.co.jpまでお知らせください。
-
-### 第1刷まで
-
-#### 2章 P.43 6行目
-
-_誤_
-
-```
-実行の際に問題が発生することがあり、実行の際に問題が発生することがあり、
-```
-
-_正_
-
-```
-実行の際に問題が発生することがあり、
-```
-
-
-#### 付録B P.313 14行目
-
-_誤_
-
-```
-4. 引き続きCatchMonsterが選択された状態で、［Hierarchy］ウィンドウの
-   MosnterParentをドラッグして、［Unity AR Hit Test Example (Script)］コンポーネン
-   トの［Hit Transform］のフィールドにドロップします。
-```
-
-_正_
-
-```
-4. 引き続きCatchMonsterが選択された状態で、［Hierarchy］ウィンドウの
-   MosnterParentをドラッグして、［Unity AR Hit Test Example (Script)］コンポーネン
-   トの［Hit Transform］のフィールドにドロップします。そして、CatchMonsterの［Transform］
-   の［Position］の値を0, 0, 0、［Scale］の値を0.2, 0.2,0.2に設定します。
-```

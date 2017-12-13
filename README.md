@@ -12,6 +12,11 @@
 * [完成状態のプロジェクト](#完成状態のプロジェクト)
 * [正誤表](https://github.com/oreilly-japan/augmented-reality-game-development-ja/wiki/errata)
 
+## フォーラム
+
+ARやVRについて日本語で質問できる[フォーラム](https://groups.google.com/d/forum/vr_ar_ja)があります。
+お気軽にご参加ください。本書の翻訳者も参加していますので、本書に関することも質問して頂けます。
+
 ## サンプルコード
 
 サンプルコードの解説は本書籍をご覧ください。

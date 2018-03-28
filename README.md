@@ -11,6 +11,9 @@
 * [リソースファイル](#サンプルコード)
 * [完成状態のプロジェクト](#完成状態のプロジェクト)
 * [正誤表](https://github.com/oreilly-japan/augmented-reality-game-development-ja/wiki/errata)
+* [アセットの代替手段について](https://github.com/oreilly-japan/augmented-reality-game-development-ja/wiki/%E3%82%A2%E3%82%BB%E3%83%83%E3%83%88%E3%81%AE%E4%BB%A3%E6%9B%BF%E6%89%8B%E6%AE%B5%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
+  * 本書にて使用していたアセット「Elemental Free パーティクルシステム」がUnityのAsset Storeから消滅したため新たにインポートすることが出来なくなりました。その代替手段についてまとめたものです
+
 
 ## フォーラム
 
